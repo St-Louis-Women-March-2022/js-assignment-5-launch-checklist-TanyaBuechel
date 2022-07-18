@@ -35,30 +35,10 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     const cargoStatus = document.getElementById('cargoStatus');
     const launchStatus = document.getElementById('launchStatus');
  
- 
-//Pilot Validate and Update
-if (validateInput(pilot) === "Is a Number") {
-    alert("Please re-enter the pilot's name. Pilot's name cannot be a number.")
-} else {
-    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
-}
- 
-//Copilot Validate and Update
-if (validateInput(copilot) === "Is a Number") {
-    alert("Please re-enter the copilot's name. Copilot's name cannot be a number.")
-} else {
-    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
-}
- 
-//Fuel Level and Cargo Mass Validate
-if (validateInput(fuelLevel) === "Not a Number") {
-    alert("Please re-enter fuel level. Fuel level must be a number.")
-} else if (validateInput(cargoLevel) === "Not a Number") {
-    alert("Please re-enter cargo mass. Cargo mass must be a number.")
-}
- 
-//Fuel Level and Cargo Mass Update
-if (fuelLevel.value < 10000) {
+//Validate and Update
+if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
+    alert("Please enter valid responses.")
+} else if (fuelLevel.value < 10000) {
     list.style.visibility = "visible";
     fuelStatus.innerHTML = `Fuel level too low for launch`;
     launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
@@ -68,7 +48,9 @@ if (fuelLevel.value < 10000) {
     cargoStatus.innerHTML = `Cargo mass is too high for launch`;
     launchStatus.innerHTML = `Shuttle Not Ready for Launch`;
     launchStatus.style.color = 'red';
-} else if (fuelLevel.value >= 10000 && cargoLevel.value <= 10000) {
+} else {
+    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
     launchStatus.style.color = 'green';
     launchStatus.innerHTML = `Shuttle is Ready for Launch!`
 }
