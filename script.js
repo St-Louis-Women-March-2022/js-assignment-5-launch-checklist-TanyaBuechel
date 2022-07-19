@@ -18,7 +18,7 @@ window.addEventListener("load", function() {
         //Add alert to notify the user that all fields are required
              if (pilot.value === "" || copilot.value === "" || fuelLevel.value === "" || cargoLevel.value === "") {
             alert("All fields are required.");
-            // event.preventDefault();
+            event.preventDefault();
             }
    
         //Use formSubmission function to validate input and update shuttle requirements
