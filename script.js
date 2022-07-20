@@ -16,10 +16,11 @@ window.addEventListener("load", function() {
         const list = document.getElementById('faultyItems');
  
         //Add alert to notify the user that all fields are required
-             if (pilot.value === "" || copilot.value === "" || fuelLevel.value === "" || cargoLevel.value === "") {
-            alert("All fields are required.");
-            event.preventDefault();
-            }
+            //  if (pilot.value === "" || copilot.value === "" || fuelLevel.value === "" || cargoLevel.value === "") {
+            // alert("All fields are required.");
+            // list.style.visibility = 'hidden';
+            // event.preventDefault();
+            // }
    
         //Use formSubmission function to validate input and update shuttle requirements
              formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);

@@ -38,12 +38,11 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 //Validate and Update
 if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
     alert("Please enter valid responses.")
-}else{
-    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
-    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
-}
-
-if (fuelLevel.value < 10000 && cargoLevel.value > 10000) {
+    list.style.visibility = 'hidden';
+}else if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
+    alert("All fields are required.")
+    list.style.visibility = 'hidden';
+}else if (fuelLevel.value < 10000 && cargoLevel.value > 10000) {
     list.style.visibility = "visible";
     fuelStatus.innerHTML = "Fuel level too low for launch";
     cargoStatus.innerHTML = `Cargo mass is too high for launch`;
@@ -63,11 +62,17 @@ if (fuelLevel.value < 10000 && cargoLevel.value > 10000) {
     launchStatus.style.color = 'red';
 } else if (fuelLevel.value >= 10000 && cargoLevel.value <= 10000) {
     launchStatus.style.color = 'green';
-    launchStatus.innerHTML = `Shuttle is Ready for Launch!`
+    launchStatus.innerHTML = `Shuttle is Ready for Launch!`;
+    list.style.visibility = 'visible';
+    fuelStatus.innerHTML = 'Fuel level is high enough for launch';
+    cargoStatus.innerHTML = 'Cargo mass is low enough for launch';
+    pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;
+    copilotStatus.innerHTML = `Co-pilot ${copilot.value} is ready for launch`;
+}
 }
 
  
-}
+
  
 async function myFetch() {
     let planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response) {
